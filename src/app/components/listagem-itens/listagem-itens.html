@@ -1,0 +1,103 @@
+
+<div class="container">
+  <h1>Achados e Perdidos</h1>
+
+  <h2>Itens encontrados</h2>
+
+  <button type="button" routerLink="/novo-item">
+    Cadastrar novo item
+  </button>
+
+  <div class="filtros">
+    <button
+      type="button"
+      [class.selecionado]="statusSelecionado() === null"
+      (click)="filtrarPorStatus(null)">
+      Todos
+    </button>
+
+    <button
+      type="button"
+      [class.selecionado]="statusSelecionado() === 'PERDIDO'"
+      (click)="filtrarPorStatus('PERDIDO')">
+      Perdidos
+    </button>
+  </div>
+
+  <p class="erro" *ngIf="mensagemErro()">
+    {{ mensagemErro() }}
+  </p>
+
+  <table *ngIf="itens().length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Local encontrado</th>
+        <th>Data do achado</th>
+        <th>Descrição da devolução</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of itens()">
+        <td>{{ item.id }}</td>
+
+        <td>{{ item.nomeItem }}</td>
+
+        <td>{{ item.localEncontrado }}</td>
+
+        <td>
+          {{ item.dataAchado | date:'dd/MM/yyyy HH:mm' }}
+        </td>
+
+        <td>
+          {{ item.descricaoDevolucao || 'Não informado' }}
+        </td>
+
+        <td>
+          <span
+            class="badge"
+            [ngClass]="{
+              'perdido': item.statusItem === 'PERDIDO',
+              'reivindicado': item.statusItem === 'REIVINDICADO',
+              'devolvido': item.statusItem === 'DEVOLVIDO'
+            }">
+            {{ item.statusItem }}
+          </span>
+        </td>
+
+        <td>
+          <button
+            *ngIf="item.statusItem !== 'DEVOLVIDO'"
+            type="button"
+            (click)="atualizarStatus(item)">
+
+            {{ item.statusItem === 'PERDIDO'
+              ? 'Reivindicar'
+              : 'Concluir devolução' }}
+
+          </button>
+
+          <button
+            type="button"
+            [routerLink]="['/editar-item', item.id]">
+            Editar
+          </button>
+
+          <button
+            type="button"
+            (click)="excluirItem(item.id)">
+            Excluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="itens().length === 0 && !mensagemErro()">
+    Nenhum item encontrado.
+  </p>
+</div>
