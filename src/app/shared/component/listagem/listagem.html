@@ -1,0 +1,55 @@
+@if (mensagem(); as m) {
+<div class="alerta" [class.sucesso]="m.tipo === 'sucesso'" [class.erro]="m.tipo === 'erro'">
+    {{ m.texto }}
+</div>
+}
+
+<label class="filtro">Filtrar por status:
+    <select (change)="filtrar($any($event.target).value)">
+        <option value="">Todos</option>
+        <option value="PERDIDO">Perdido</option>
+        <option value="REIVINDICADO">Reivindicado</option>
+        <option value="DEVOLVIDO">Devolvido</option>
+    </select>
+</label>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Item</th>
+            <th>Local</th>
+            <th>Data</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (item of itens(); track item.id) {
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.nomeItem }}</td>
+            <td>{{ item.localEncontrado }}</td>
+            <td>{{ item.dataAchado | date: 'dd/MM/yyyy' }}</td>
+            <td><span class="badge" [class]="item.status">{{ item.status }}</span></td>
+            <td class="acoes">
+                @if (item.status === 'PERDIDO') {
+                <button class="btn" (click)="mudarStatus(item, 'REIVINDICADO')">⚡ Reivindicar</button>
+                }
+                @if (item.status === 'REIVINDICADO') {
+                <button class="btn" (click)="mudarStatus(item, 'DEVOLVIDO')">⚡ Devolver</button>
+                }
+                @if (item.status !== 'PERDIDO') {
+                <button class="btn" (click)="mudarStatus(item, 'PERDIDO')">↩ Voltar p/ Perdido</button>
+                }
+                <a class="btn" [routerLink]="['/editar', item.id]">✏️ Editar</a>
+                <button class="btn perigo" (click)="excluir(item)">🗑️ Excluir</button>
+            </td>
+        </tr>
+        } @empty {
+        <tr>
+            <td colspan="6">Nenhum item encontrado.</td>
+        </tr>
+        }
+    </tbody>
+</table>

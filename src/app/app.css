@@ -1,0 +1,24 @@
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1f3a5f;
+    color: #fff;
+    padding: 12px 24px;
+}
+
+.topo a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.topo h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.conteudo {
+    max-width: 1000px;
+    margin: 24px auto;
+    padding: 0 16px;
+}

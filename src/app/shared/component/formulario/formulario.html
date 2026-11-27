@@ -1,0 +1,37 @@
+<h2>{{ id ? 'Editar item' : 'Novo item' }}</h2>
+
+@if (erroApi()) {
+<div class="alerta erro">{{ erroApi() }}</div>
+}
+
+<form [formGroup]="form" (ngSubmit)="salvar()">
+    <label>Nome do item *
+        <input formControlName="nomeItem" />
+    </label>
+    @if (invalido('nomeItem')) {
+    <small class="erro-campo">Informe o nome (mínimo 3 caracteres).</small>
+    }
+
+    <label>Local onde foi encontrado *
+        <input formControlName="localEncontrado" />
+    </label>
+    @if (invalido('localEncontrado')) {
+    <small class="erro-campo">Informe o local.</small>
+    }
+
+    <label>Data em que foi achado *
+        <input type="date" formControlName="dataAchado" />
+    </label>
+    @if (invalido('dataAchado')) {
+    <small class="erro-campo">Informe a data.</small>
+    }
+
+    <label>Descrição da devolução
+        <textarea formControlName="descricaoDevolucao" rows="3"></textarea>
+    </label>
+
+    <div class="acoes">
+        <button type="submit" class="btn primario">💾 Salvar registro</button>
+        <a routerLink="/" class="btn">❌ Cancelar</a>
+    </div>
+</form>

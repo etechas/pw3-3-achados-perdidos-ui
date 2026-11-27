@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f5f6f8;
+}
+
+.acoes {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 6px 10px;
+    border: 1px solid #999;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #222;
+    font-size: 13px;
+}
+
+.btn.primario {
+    background: #2e7d32;
+    border-color: #2e7d32;
+    color: #fff;
+}
+
+.btn.perigo {
+    background: #c62828;
+    border-color: #c62828;
+    color: #fff;
+}
+
+.alerta {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.alerta.sucesso {
+    background: #e8f5e9;
+    color: #1b5e20;
+}
+
+.alerta.erro {
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+/* You can add global styles to this file, and also import other style files */

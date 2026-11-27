@@ -1,0 +1,42 @@
+.filtro {
+    font-weight: bold;
+}
+
+.filtro select {
+    padding: 8px;
+    font-size: 14px;
+    margin-left: 6px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    margin-top: 12px;
+}
+
+th,
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.badge {
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.badge.PERDIDO {
+    background: #f9a825;
+}
+
+.badge.REIVINDICADO {
+    background: #1565c0;
+}
+
+.badge.DEVOLVIDO {
+    background: #2e7d32;
+}
